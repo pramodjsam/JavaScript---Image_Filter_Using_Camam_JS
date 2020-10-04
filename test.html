@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+	<style>
+		#canvas{
+			background: #efefef;
+			width: 100%;
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-info mb-3">
+	<div class="container">
+		<a href="#" class="navbar-brand">Filter App</a>
+	</div>
+</nav>
+<div class="container">
+	<div class="row my-3">
+		<div class="col-md-10 m-auto">
+			<div class="custom-file mb-3">
+				<input type="file" class="custom-file-input" id="upload-file">
+				<label for="upload-file" class="custom-file-label">Upload Image</label>
+			</div>
+			<canvas id="canvas"></canvas>
+
+			<h4 class="text-center my-3">Filter</h4>
+			<div class="row my-4">
+				<div class="col-md-3">
+					<div class="btn-group btn-group-sm">
+						<button class="filter-btn brightness-remove btn btn-info">-</button>
+						<button class="btn btn-secondary" disabled="">Brightness</button>
+						<button class="filter-btn brightness-add btn btn-info">+</button>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="btn-group btn-group-sm">
+						<button class="filter-btn contrast-remove btn btn-info">-</button>
+						<button class="btn btn-secondary" disabled="">Contrast</button>
+						<button class="filter-btn contrast-add btn btn-info">+</button>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="btn-group btn-group-sm">
+						<button class="filter-btn saturation-remove btn btn-info">-</button>
+						<button class="btn btn-secondary" disabled="">Saturation</button>
+						<button class="filter-btn saturation-add btn btn-info">+</button>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="btn-group btn-group-sm">
+						<button class="filter-btn vibrance-remove btn btn-info">-</button>
+						<button class="btn btn-secondary" disabled="">Vibrance</button>
+						<button class="filter-btn vibrance-add btn btn-info">+</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- end of row -->
+
+			<h4 class="text-center my-3">Effects</h4>
+			<div class="row my-4">
+				<div class="col-md-3">
+					<button class="filter-btn vintage-add btn btn-dark btn-block">Vintage</button>
+				</div>
+				<div class="col-md-3">
+					<button class="filter-btn lomo-add btn btn-dark btn-block">Lomo</button>
+				</div>
+				<div class="col-md-3">
+					<button class="filter-btn clarity-add btn btn-dark btn-block">Clarity</button>
+				</div>
+				<div class="col-md-3">
+					<button class="filter-btn sincity-add btn btn-dark btn-block">Sincity</button>
+				</div>
+			</div>
+
+			<div class="row my-4">
+				<div class="col-md-3">
+					<button class="filter-btn crossprocess-add btn btn-dark btn-block">Cross Process</button>
+				</div>
+				<div class="col-md-3">
+					<button class="filter-btn pinhole-add btn btn-dark btn-block">Pinhole</button>
+				</div>
+				<div class="col-md-3">
+					<button class="filter-btn nostalgia-add btn btn-dark btn-block">Nostalgia</button>
+				</div>
+				<div class="col-md-3">
+					<button class="filter-btn hermajesty-add btn btn-dark btn-block">Her Majesty</button>
+				</div>
+			</div>
+
+			<div class="row my-4">
+				<div class="col-md-6">
+					<button id="download-btn" class="btn btn-primary btn-block">Download Image</button>
+				</div>
+				<div class="col-md-6">
+					<button id="revert-btn" class="btn btn-danger btn-block">Remove Image</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.1.2/caman.full.min.js"></script>
+<script>
+	const canvas= document.getElementById("canvas");
+	const ctx= canvas.getContext("2d");
+	let filename="";
+	let img= new Image();
+	const downloadBtn=document.getElementById("download-btn");
+	const revertBtn=document.getElementById("revert-btn");
+	const uploadFile=document.getElementById("upload-file");
+
+	document.addEventListener('click',function(e){
+		if(e.target.classList.contains("filter-btn")){
+			if(e.target.classList.contains('brightness-remove')){
+				Caman('#canvas',img,function(){
+					this.brightness(-5).render()
+				})
+			}else if(e.target.classList.contains('brightness-add')){
+				Caman('#canvas',img,function(){
+					this.brightness(5).render()
+				})
+			}else if(e.target.classList.contains('contrast-remove')){
+				Caman('#canvas',img,function(){
+					this.contrast(-5).render()
+				})
+			}else if(e.target.classList.contains('contrast-add')){
+				Caman('#canvas',img,function(){
+					this.contrast(5).render()
+				})
+			}else if(e.target.classList.contains('saturation-remove')){
+				Caman('#canvas',img,function(){
+					this.saturation(-5).render()
+				})
+			}else if(e.target.classList.contains('saturation-add')){
+				Caman('#canvas',img,function(){
+					this.saturation(5).render()
+				})
+			}else if(e.target.classList.contains('vibrance-remove')){
+				Caman('#canvas',img,function(){
+					this.vibrance(-5).render()
+				})
+			}else if(e.target.classList.contains('vibrance-add')){
+				Caman('#canvas',img,function(){
+					this.vibrance(5).render()
+				})
+			}else if(e.target.classList.contains('vintage-add')){
+				Caman('#canvas',img,function(){
+					this.vintage().render()
+				})
+			}else if(e.target.classList.contains('lomo-add')){
+				Caman('#canvas',img,function(){
+					this.lomo().render()
+				})
+			}else if(e.target.classList.contains('clarity-add')){
+				Caman('#canvas',img,function(){
+					this.clarity().render()
+				})
+			}else if(e.target.classList.contains('sincity-add')){
+				Caman('#canvas',img,function(){
+					this.sinCity().render()
+				})
+			}else if(e.target.classList.contains('crossprocess-add')){
+				Caman('#canvas',img,function(){
+					this.crossProcess().render()
+				})
+			}else if(e.target.classList.contains('pinhole-add')){
+				Caman('#canvas',img,function(){
+					this.pinhole().render()
+				})
+			}else if(e.target.classList.contains('nostalgia-add')){
+				Caman('#canvas',img,function(){
+					this.nostalgia().render()
+				})
+			}else if(e.target.classList.contains('hermajesty-add')){
+				Caman('#canvas',img,function(){
+					this.herMajesty().render()
+				})
+			}			
+		}
+	})
+
+	revertBtn.addEventListener("click",function(){
+		Caman('#canvas',img,function(){
+			this.revert();
+		})
+	})
+
+	uploadFile.addEventListener("change",function(){
+		const file= document.getElementById("upload-file").files[0];
+		const reader= new FileReader();
+		if(file){
+			filename=file.name;
+			reader.readAsDataURL(file);
+		}
+		reader.addEventListener("load",function(){
+			img=new Image();
+			img.src=reader.result;
+			img.onload=function(){
+				canvas.width=img.width;
+				canvas.height=img.height;
+				ctx.drawImage(img,0,0,img.width,img.height);
+				canvas.removeAttribute('data-caman-id')
+			}
+		},false)
+	})
+
+	downloadBtn.addEventListener("click",function(e){
+		let fileExtension= filename.slice(-4);
+		let newFileName;
+		if(fileExtension===".png" || fileExtension===".jpg"){
+			newFileName= filename.substring(0,filename.length-4) + "-edited.jpg";
+		}
+		download(canvas,newFileName)
+	})
+	function download(canvas,filename){
+		let e;
+		let link=document.createElement("a");
+		link.download=filename;
+		link.href=canvas.toDataURL('image/jpeg',0.8);
+		e= new MouseEvent();
+		link.dispatchEvent(e)
+	}
+</script>
+</body>
+</html>
